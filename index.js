@@ -18,6 +18,7 @@ const prefix = '.';
 
 const { Client, EmbedBuilder, Collection, GatewayIntentBits } = require('discord.js');
 const mongoose = require('mongoose')
+const { connection } = require('mongoose')
 // Secrets
 
 const { token } = require('./JSON/config.json');
@@ -105,9 +106,9 @@ function get_ready() {
 
 	const readych = client.channels.cache.get('997884387326693436');
 	const readyem = new EmbedBuilder()
-	.setTitle(`Bot Online`)
-	.setColor("Green")
-	.setDescription(`Bot Is Online, More Features Like Database Connection, Ping and Much More Will Be Added Soon.`)
+		.setTitle(`Bot Online`)
+		.setColor("Green")
+		.setDescription(`Bot Is Online, More Features Like Database Connection, Ping and Much More Will Be Added Soon.`)
 
 
 	readych.send({ embeds: [readyem] });
