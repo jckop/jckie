@@ -1,13 +1,13 @@
-const express = require('express')
-const app = express()
+const express = require('express');
+const app = express();
 
 app.listen(3000, () => {
-	console.log(`Project Running`)
-})
+	console.log('Project Running');
+});
 
-app.get("/", (req, res) => {
-	res.send(`<!DOCTYPE html><html><head><title>Bot Online</title></head><body><h1>Bot Online</h1></body></html>`);
-})
+app.get('/', (req, res) => {
+	res.send('<!DOCTYPE html><html><head><title>Bot Online</title></head><body><h1>Bot Online</h1></body></html>');
+});
 /* eslint-disable no-undef */
 const fs = require('node:fs');
 
@@ -17,8 +17,7 @@ const prefix = '.';
 // Djs Objects
 
 const { Client, EmbedBuilder, Collection, GatewayIntentBits } = require('discord.js');
-const mongoose = require('mongoose')
-const { connection } = require('mongoose')
+const mongoose = require('mongoose');
 // Secrets
 
 const { token } = require('./JSON/config.json');
@@ -31,7 +30,7 @@ const client = new Client({
 		[GatewayIntentBits.GuildBans],
 		[GatewayIntentBits.Guilds],
 		[GatewayIntentBits.GuildMessages],
-		[GatewayIntentBits.MessageContent]
+		[GatewayIntentBits.MessageContent],
 	],
 });
 
@@ -106,14 +105,14 @@ function get_ready() {
 
 	const readych = client.channels.cache.get('997884387326693436');
 	const readyem = new EmbedBuilder()
-		.setTitle(`Bot Online`)
-		.setColor("Green")
-		.setDescription(`Bot Is Online, More Features Like Database Connection, Ping and Much More Will Be Added Soon.`)
+		.setTitle('Bot Online')
+		.setColor('Green')
+		.setDescription('Bot Is Online, More Features Like Database Connection, Ping and Much More Will Be Added Soon.');
 
 
 	readych.send({ embeds: [readyem] });
 
-	client.user.setPresence({ activities: [{ name: `for comamnds in Jck's Club`, type: `WATCHING` }] })
+	client.user.setPresence({ activities: [{ name: 'for comamnds in Jck\'s Club', type: 'WATCHING' }] });
 	console.log(`Bot Online And Logged In As ${client.user.tag}`);
 
 	if (!mongouri) return;
@@ -130,7 +129,7 @@ function get_ready() {
 
 
 client.on('ready', () => {
-	get_ready()
+	get_ready();
 });
 
 
