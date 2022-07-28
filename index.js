@@ -67,7 +67,8 @@ client.on('messageCreate', (message) => {
 
 	triggerWords.forEach((word) => {
 		if (message.content.includes(word)) {
-			message.channel.send('This Server Is A Safe Space!');
+			if (message.author.bot) return;
+			message.channel.send('You Cannot Say That Word');
 		}
 	});
 });

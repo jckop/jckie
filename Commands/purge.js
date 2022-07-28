@@ -1,5 +1,5 @@
 /* eslint-disable no-shadow */
-/* eslint-disable no-unused-vars */
+
 module.exports.run = async (client, message) => {
 
 	if (message.author.bot) return;
@@ -23,7 +23,7 @@ module.exports.run = async (client, message) => {
 	if (amount > 99) amount = 99;
 	try {
 		// we're adding 1 here to delete the command message as well.
-		await message.channel.bulkDelete(parseInt(amount) + 1, true).then(m => {
+		await message.channel.bulkDelete(parseInt(amount) + 1, true).then(() => {
 			// the bot will send a message after bulkdeleting and delete it after 3 seconds
 			// It will only display the amount of messages that the bot has deleted.
 			message.channel.send('Purge Pursued').then(m => {
