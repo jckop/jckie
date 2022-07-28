@@ -8,7 +8,7 @@ module.exports.run = (client, message, args) => {
 
 	if (!args.length) return message.channel.send('> Usage: .announce <title> <message> <-ping ?>');
 
-    let mention;
+	let mention;
 
 	const channel = client.channels.cache.get('997883596704587866');
 
