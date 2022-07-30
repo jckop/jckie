@@ -11,7 +11,9 @@ module.exports.run = async (client, message) => {
 	});
 
 	if (!userWarnings?.length) return message.channel.send(`${user} has no warnings in the server`);
+	const autmodus = client.users.cache.get(warnModel.userId);
 
+	if (userWarnings.length === 5) return autmodus.ban();
 	const embedDescription = userWarnings
 		.map((warn) => {
 
