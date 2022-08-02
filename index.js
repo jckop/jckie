@@ -1,3 +1,6 @@
+/* eslint-disable no-mixed-spaces-and-tabs */
+/* eslint-disable no-extra-semi */
+
 const express = require('express');
 const app = express();
 
@@ -6,7 +9,7 @@ app.listen(3000, () => {
 });
 
 app.get('/', (req, res) => {
-	res.send('<!DOCTYPE html><html><head><title>Bot Online</title></head><body><h1>Bot Online</h1></body></html>');
+	res.send('Hello World!');
 });
 /* eslint-disable no-undef */
 const fs = require('node:fs');
@@ -17,7 +20,10 @@ const prefix = '.';
 // Djs Objects
 
 const { Client, EmbedBuilder, Collection, GatewayIntentBits } = require('discord.js');
+// Packages
+
 const mongoose = require('mongoose');
+
 // Secrets
 
 const { token } = require('./JSON/config.json');
@@ -31,8 +37,10 @@ const client = new Client({
 		[GatewayIntentBits.Guilds],
 		[GatewayIntentBits.GuildMessages],
 		[GatewayIntentBits.MessageContent],
+		[GatewayIntentBits.GuildMessageReactions],
 	],
 });
+
 
 // Command Paths
 
@@ -75,7 +83,7 @@ client.on('messageCreate', (message) => {
 
 client.on('guildMemberAdd', (member) => {
 
-	const byech = client.channels.cache.get('997883280659587142');
+	const welcomech = client.channels.cache.get('997883267556577320');
 
 	const welcomeEmbed = new EmbedBuilder()
 		.setTitle('A New Member Has Joined The Server!')
@@ -86,24 +94,23 @@ client.on('guildMemberAdd', (member) => {
 			'Read The Rules In <#992046426928459837> and while this is not needed, introduce yourself in <#992500204970455070>',
 		);
 
-	byech.send({ embeds: [welcomeEmbed] });
+	welcomech.send({ embeds: [welcomeEmbed] });
 });
 
 client.on('guildMemberRemove', (member) => {
 
-	const welcomech = client.channels.cache.get('997883267556577320');
+	const byech = client.channels.cache.get('997883280659587142');
 
 	const goodbyeEmbed = new EmbedBuilder()
 		.setTitle('A Member Has Left Us')
 		.setColor('Red')
 		.setDescription(`${member.user.tag} Has Left Us... We're Sorry For What We Did That Made You Leave`);
 
-	welcomech.send({ embeds: [goodbyeEmbed] });
+	byech.send({ embeds: [goodbyeEmbed] });
 });
 
 // Functions
 function get_ready() {
-
 	const readych = client.channels.cache.get('997884387326693436');
 	const readyem = new EmbedBuilder()
 		.setTitle('Bot Online')
@@ -113,7 +120,13 @@ function get_ready() {
 
 	readych.send({ embeds: [readyem] });
 
-	client.user.setPresence({ activities: [{ name: 'for comamnds in Jck\'s Club', type: 'WATCHING' }] });
+	client.user.setPresence({
+		status: 'idle',
+		activities: {
+		  name: 'Jck\'s Club',
+		  type: 'WATCHING',
+		},
+	});
 	console.log(`Bot Online And Logged In As ${client.user.tag}`);
 
 	if (!mongouri) return;
@@ -133,5 +146,5 @@ client.on('ready', () => {
 	get_ready();
 });
 
-
+module.exports = triggerWords;
 client.login(token);

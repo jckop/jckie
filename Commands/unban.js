@@ -3,6 +3,7 @@ const { EmbedBuilder } = require('discord.js');
 
 module.exports.run = async (client, message, args) => {
 	try {
+		if (message.member.permissions.has('ADMINISTIRATOR')) return message.channel.send('You do not have permission to do that!');
 		const modlogch = client.channels.cache.get('996785753348649101');
 		const id = args[0];
 		if (!rgx.test(id)) return message.channel.send('Please provide a valid user ID');
