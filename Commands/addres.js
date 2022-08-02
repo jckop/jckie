@@ -5,7 +5,7 @@ module.exports.run = (client, message) => {
 
 	if (!message.member.permissions.has('ADMINISTRATOR')) return message.channel.send('You Do Not Have Valid Permissions!');
 
-	const resourcech = client.channels.cache.get('996785559760535652');
+	const resourcech = client.channels.cache.get('1002549356735504494');
 
 	const msglink = message.content.slice(7);
 
@@ -13,7 +13,9 @@ module.exports.run = (client, message) => {
 		.setTitle('New Resource Made')
 		.setColor('Green')
 		.setDescription(`[Resource Link](${msglink})`)
-		.addField('Made By - ', `<@${message.author.id}>`);
+		.addFields(
+{ name: 'Made By - ', value: `<@${message.author.id}>`}
+)
 
 
 	const addresourceEmbed = new EmbedBuilder()

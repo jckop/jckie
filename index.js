@@ -115,7 +115,8 @@ function get_ready() {
 	const readyem = new EmbedBuilder()
 		.setTitle('Bot Online')
 		.setColor('Green')
-		.setDescription('Bot Is Online, More Features Like Database Connection, Ping and Much More Will Be Added Soon.');
+		.setDescription(`${Date.now() - message.createdTimestamp}ms`);
+		// Getting the connection of the MongoDB states
 
 
 	readych.send({ embeds: [readyem] });
