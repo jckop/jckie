@@ -109,13 +109,13 @@ client.on('guildMemberRemove', (member) => {
 	byech.send({ embeds: [goodbyeEmbed] });
 });
 
-// Functions
-function get_ready() {
+
+client.on('ready', () => {
 	const readych = client.channels.cache.get('997884387326693436');
+
 	const readyem = new EmbedBuilder()
 		.setTitle('Bot Online')
 		.setColor('Green')
-		.setDescription(`${Date.now() - message.createdTimestamp}ms`);
 		// Getting the connection of the MongoDB states
 
 
@@ -140,11 +140,6 @@ function get_ready() {
 		console.log('An Error Has Occured');
 		console.log(err);
 	});
-}
-
-
-client.on('ready', () => {
-	get_ready();
 });
 
 module.exports = triggerWords;
