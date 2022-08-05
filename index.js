@@ -116,7 +116,7 @@ client.on('ready', () => {
 	const readyem = new EmbedBuilder()
 		.setTitle('Bot Online')
 		.setColor('Green')
-		// Getting the connection of the MongoDB states
+	// Getting the connection of the MongoDB states
 
 
 	readych.send({ embeds: [readyem] });
@@ -124,8 +124,8 @@ client.on('ready', () => {
 	client.user.setPresence({
 		status: 'idle',
 		activities: {
-		  name: 'Jck\'s Club',
-		  type: 'WATCHING',
+			name: 'Jck\'s Club',
+			type: 'WATCHING',
 		},
 	});
 	console.log(`Bot Online And Logged In As ${client.user.tag}`);
@@ -140,6 +140,22 @@ client.on('ready', () => {
 		console.log('An Error Has Occured');
 		console.log(err);
 	});
+});
+
+client.on('messageReactionAdd', (reaction, user, message) => {
+	if (reaction == '✅') {
+		let server = client.guilds.cache.get("996497692333191239");
+		let role = server.roles.cache.find(r => r.id === "1004822549525430432");
+
+		user.roles.add(role)
+	}
+});
+
+client.on('messageReactionRemove', (user, message) => {
+	let server = client.guilds.cache.get("996497692333191239");
+	let role = server.roles.cache.find(r => r.id === "1004822549525430432");
+
+	user.roles.remove(role)
 });
 
 module.exports = triggerWords;
