@@ -7,7 +7,7 @@ module.exports.run = (client, message) => {
 
 	const test = reg.test(msghex);
 	if (test !== true) return message.channel.send('INVALID HEX COLOR');
-
+	if (!msghex) return message.channel.send('INVALID HEX COLOR');
 	const embed = new EmbedBuilder()
 		.setTitle(`${msghex}`)
 		.setURL(`https://www.color-hex.com/color/${msghex}`)

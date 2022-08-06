@@ -11,6 +11,10 @@ module.exports.run = (client, message) => {
 		message.content.lastIndexOf(']'),
 	);
 
+	if (!description) return;
+	if (!title) return;
+	if (!description && !title) return;
+
 	const announcech = client.channels.cache.get('997883596704587866');
 	const embed = new EmbedBuilder()
 		.setAuthor({ name: `${message.member.displayName}`, iconURL: message.author.displayAvatarURL({ dynamic: true }) })

@@ -1,13 +1,13 @@
 const { EmbedBuilder } = require('discord.js');
 
 
-module.exports.run = (client, message) => {
+module.exports.run = (client, message, args) => {
 	const target = message.mentions.users.first();
 	if (!message.member.permissions.has('KICK_MEMBERS')) return;
 	message.channel.send('You coudn\'t kick that member!');
 	const modlogch = client.channels.cache.get('996785753348649101');
 	if (!target) return message.channel.send('No User To Kick!');
-	const msgreason = message.content.slice(6);
+	const msgreason = args.slice(1).join(" ")
 
 	if (target) {
 		const memberTarget = message.guild.members.cache.get(target.id);

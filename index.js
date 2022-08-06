@@ -142,21 +142,5 @@ client.on('ready', () => {
 	});
 });
 
-client.on('messageReactionAdd', (reaction, user, message) => {
-	if (reaction == '✅') {
-		let server = client.guilds.cache.get("996497692333191239");
-		let role = server.roles.cache.find(r => r.id === "1004822549525430432");
-
-		user.roles.add(role)
-	}
-});
-
-client.on('messageReactionRemove', (user, message) => {
-	let server = client.guilds.cache.get("996497692333191239");
-	let role = server.roles.cache.find(r => r.id === "1004822549525430432");
-
-	user.roles.remove(role)
-});
-
 module.exports = triggerWords;
 client.login(token);
