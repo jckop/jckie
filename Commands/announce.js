@@ -1,7 +1,7 @@
 const { EmbedBuilder } = require('discord.js');
 
 module.exports.run = (client, message) => {
-	if (!message.member.permissions.has('ADMINISTIRATOR')) return;
+	if (!message.member.permissions.has('ADMINISTIRATOR', 'MANAGE_MESSAGES')) return;
 	const title = message.content.slice(
 		message.content.indexOf('<') + 1,
 		message.content.lastIndexOf('>'),
@@ -13,7 +13,6 @@ module.exports.run = (client, message) => {
 
 	if (!description) return;
 	if (!title) return;
-	if (!description && !title) return;
 
 	const announcech = client.channels.cache.get('997883596704587866');
 	const embed = new EmbedBuilder()

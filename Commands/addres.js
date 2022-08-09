@@ -9,13 +9,15 @@ module.exports.run = (client, message) => {
 
 	const msglink = message.content.slice(7);
 
+	if (!msglink) return message.channel.send('No Link!');
+
 	const newResource = new EmbedBuilder()
 		.setTitle('New Resource Made')
 		.setColor('Green')
 		.setDescription(`[Resource Link](${msglink})`)
 		.addFields(
-{ name: 'Made By - ', value: `<@${message.author.id}>`}
-)
+			{ name: 'Made By - ', value: `<@${message.author.id}>` }
+		)
 
 
 	const addresourceEmbed = new EmbedBuilder()

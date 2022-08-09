@@ -3,7 +3,7 @@ const { EmbedBuilder } = require('discord.js');
 module.exports.run = async (client, message) => {
 
 	const user = message.mentions.users.first();
-
+	if (!user) return message.channel.send(`No user to check!`);
 
 	const userWarnings = await warnModel.find({
 		userId: user.id,

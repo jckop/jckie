@@ -8,7 +8,7 @@ module.exports.run = (client, message, args) => {
 	const modlogch = client.channels.cache.get('996785753348649101');
 	if (!target) return message.channel.send('No User To Kick!');
 	const msgreason = args.slice(1).join(" ")
-
+	if (!msgreason) return message.channel.send('no Reason!');
 	if (target) {
 		const memberTarget = message.guild.members.cache.get(target.id);
 		memberTarget.kick();

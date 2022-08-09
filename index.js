@@ -1,17 +1,3 @@
-/* eslint-disable no-mixed-spaces-and-tabs */
-/* eslint-disable no-extra-semi */
-
-const express = require('express');
-const app = express();
-
-app.listen(3000, () => {
-	console.log('Project Running');
-});
-
-app.get('/', (req, res) => {
-	res.send('Hello World!');
-});
-/* eslint-disable no-undef */
 const fs = require('node:fs');
 
 // Other Vars
@@ -19,7 +5,7 @@ const prefix = '.';
 
 // Djs Objects
 
-const { Client, EmbedBuilder, Collection, GatewayIntentBits } = require('discord.js');
+const { Client, EmbedBuilder, Collection, GatewayIntentBits, Partials } = require('discord.js');
 // Packages
 
 const mongoose = require('mongoose');
@@ -28,10 +14,13 @@ const mongoose = require('mongoose');
 
 const { token } = require('./JSON/config.json');
 const { mongouri } = require('./JSON/config.json');
+const { channel } = require('node:diagnostics_channel');
 
 // Client
 
 const client = new Client({
+	disableEveryone: true,
+	partials: [Partials.Channel, Partials.Message, Partials.Reaction],
 	intents: [
 		[GatewayIntentBits.GuildBans],
 		[GatewayIntentBits.Guilds],
@@ -109,6 +98,29 @@ client.on('guildMemberRemove', (member) => {
 	byech.send({ embeds: [goodbyeEmbed] });
 });
 
+client.on('messageReactionAdd', async (reaction, user) => {
+	if (reaction.message.partial) await reaction.message.fetch();
+	if (reaction.partial) await reaction.fetch();
+	if (user.bot) return;
+	if (!reaction.message.guild) return;
+	if (reaction.message.id === '1006209455857352764') {
+		if (reaction.emoji.name === '✅') {
+			await reaction.message.guild.members.cache.get(user.id).roles.add('1004822549525430432')
+		}
+	}
+})
+
+client.on('messageReactionRemove', async (reaction, user) => {
+	if (reaction.message.partial) await reaction.message.fetch();
+	if (reaction.partial) await reaction.fetch();
+	if (user.bot) return;
+	if (!reaction.message.guild) return;
+	if (reaction.message.id === '1006209455857352764') {
+		if (reaction.emoji.name === '✅') {
+			await reaction.message.guild.members.cache.get(user.id).roles.remove('1004822549525430432')
+		}
+	}
+})
 
 client.on('ready', () => {
 	const readych = client.channels.cache.get('997884387326693436');
@@ -116,8 +128,6 @@ client.on('ready', () => {
 	const readyem = new EmbedBuilder()
 		.setTitle('Bot Online')
 		.setColor('Green')
-	// Getting the connection of the MongoDB states
-
 
 	readych.send({ embeds: [readyem] });
 
@@ -140,6 +150,18 @@ client.on('ready', () => {
 		console.log('An Error Has Occured');
 		console.log(err);
 	});
+});
+
+// createdTimestamp
+
+client.off('ready', () => {
+	const readych = client.channels.cache.get('997884387326693436');
+
+	const readyem = new EmbedBuilder()
+		.setTitle('Bot Offline')
+		.setColor('Red')
+
+	readych.send({ embeds: [readyem] });
 });
 
 module.exports = triggerWords;
